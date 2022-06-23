@@ -1,10 +1,10 @@
 package com.company.lesson5;
 
 public class CreditCard {
-    private int billNumber;
+    private String billNumber;
     private int currentSum;
 
-    public CreditCard(int billNumber, int currentSum) {
+    public CreditCard(String billNumber, int currentSum) {
         this.billNumber = billNumber;
         this.currentSum = currentSum;
     }
@@ -17,6 +17,7 @@ public class CreditCard {
         }
         int charge = currentSum + add;
         currentSum = charge;
+        System.out.println();
         return currentSum;
     }
 
@@ -28,11 +29,13 @@ public class CreditCard {
         }
         int withdraw = currentSum - del;
         currentSum = withdraw;
+        System.out.println();
         return currentSum;
     }
 
-    void currentInfo() {
+    void showCurrentInfo() {
         System.out.println("Current sum of your credit card is " + currentSum);
         System.out.println("Bill number of your credit card is " + billNumber);
+        System.out.println();
     }
 }
