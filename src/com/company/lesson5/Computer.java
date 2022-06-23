@@ -3,8 +3,8 @@ package com.company.lesson5;
 public class Computer {
     private int price;
     private String model;
-   private RAM ram;
-   private HDD hdd;
+    private RAM ram;
+    private HDD hdd;
 
     public Computer(int price, String model) {
         this.price = price;
@@ -20,25 +20,27 @@ public class Computer {
         this.hdd = hdd;
     }
 
-    void ComputerInfoShort() {
+    void showComputerInfoShort() {
         System.out.println("Computer price is " + price);
         System.out.println("Computer model is " + model);
+        System.out.println();
     }
 
-    void ComputerInfoLong() {
+    void showComputerInfoLong() {
         System.out.println("Computer price is " + price);
         System.out.println("Computer model is " + model);
         System.out.println("Computer has " + ram);
         System.out.println("Computer has " + hdd);
+        System.out.println();
     }
 
     @Override
     public String toString() {
         return "Computer{" +
-                "price=" + price +
-                ", model='" + model + '\'' +
-                ", ram=" + ram +
-                ", hdd=" + hdd +
+                "price " + price +
+                ", model '" + model + '\'' +
+                ", ram " + ram +
+                ", hdd " + hdd +
                 '}';
     }
 }
