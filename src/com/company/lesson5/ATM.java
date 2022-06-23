@@ -2,55 +2,72 @@ package com.company.lesson5;
 
 public class ATM {
     private int currentSumATM;
+    private int USD20;
     private int USD50;
     private int USD100;
-    private int USD200;
 
-    public ATM(int USD50, int USD100, int USD200){
-                this.USD50=USD50;
-        this.USD100=USD100;
-        this.USD200=USD200;
-        currentSumATM=USD50*50+USD100*100+USD200*200;
+    public ATM(int USD20, int USD50, int USD100) {
+        this.USD20 = USD20;
+        this.USD50 = USD50;
+        this.USD100 = USD100;
+        currentSumATM = USD20 * 20 + USD50 * 50 + USD100 * 100;
     }
 
-    int chargeATM(int USD50, int USD100, int USD200) {
-
-        int addATM=USD50*50+USD100*100+USD200*200;
-        System.out.println("Please, use only 50, 100 or 200 money value");
-        if (addATM > 0) {
-            System.out.println("Charge sum equals " + addATM);
-                    } else {
-            System.out.println("Invalid charge sum");
-        }
-        int chargeATM = currentSumATM + addATM;
+    int chargeATM(int amount) {
+        System.out.println("Charge sum is " + amount);
+        int chargeATM = currentSumATM + amount;
         currentSumATM = chargeATM;
-        System.out.println("Current sum in ATM is "+ currentSumATM);
-                return currentSumATM;
-
-
-    }
-
-    int withdrawATM(int delATM) {
-        System.out.println("Withdraw sum must be multiple of 50 at least");
-        if (delATM > 0 && delATM <= currentSumATM && delATM%50==0) {
-            System.out.println("Withdraw sum equals " + delATM);
-            System.out.println("Your operation is successful");
-        } else {
-            System.out.println("Invalid withdraw sum");
+        if (amount >= 100) {
+            USD100 += (amount - amount % 100) / 100;
         }
-        int withdrawATM = currentSumATM - delATM;
-        currentSumATM = withdrawATM;
-
-        System.out.println("Current sum in ATM is "+ currentSumATM);
-                    return currentSumATM;
-
+        amount = amount % 100;
+        if (amount >= 50) {
+            USD50 += (amount - amount % 50) / 50;
+        }
+        amount = amount % 50;
+        if (amount >= 20) {
+            USD20 += (amount - amount % 20) / 20;
+        }
+        System.out.println("Current sum in ATM is " + currentSumATM);
+        System.out.println();
+        return currentSumATM;
     }
 
-    void currentATMInfo() {
-        System.out.println("Total sum in ATM is " + currentSumATM + " UDS");
-        System.out.println("The amount of UDS50 is " + USD50);
-        System.out.println("The amount of UDS100 is " + USD100);
-        System.out.println("The amount of UDS200 is " + USD200);
+    boolean withdrawATM(int amount) {
+        if (currentSumATM >= amount) {
+            System.out.println("Withdraw sum is " + amount);
+            int withdrawATM = currentSumATM - amount;
+            currentSumATM = withdrawATM;
+            if (amount >= 100) {
+                USD100 -= (amount - amount % 100) / 100;
+                System.out.println("USD100 = " + (amount - amount % 100) / 100);
+            }
+            amount = amount % 100;
+            if (amount >= 50) {
+                USD50 -= (amount - amount % 50) / 50;
+                System.out.println("USD50 = " + (amount - amount % 50) / 50);
+            }
+            amount = amount % 50;
+            if (amount >= 20) {
+                USD20 -= (amount - amount % 20) / 20;
+                System.out.println("USD20 = " + (amount - amount % 20) / 20);
+            }
+            System.out.println("Current sum in ATM is " + currentSumATM);
+            System.out.println();
+            return true;
+        } else {
+            System.out.println("Error. Withdraw sum exceeds total sum in ATM");
+            System.out.println();
+        }
+        return false;
+    }
+
+    void showCurrentATMInfo() {
+        System.out.println("Total sum in ATM is " + currentSumATM + " USD, including:");
+        System.out.println("USD20 = " + USD20);
+        System.out.println("USD50 = " + USD50);
+        System.out.println("USD100 = " + USD100);
+        System.out.println();
     }
 
 }
